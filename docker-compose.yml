@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    restart: always
+    container_name: grafana
+    hostname: grafana
+    user: "472"
+    volumes:
+      - $PWD/grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+
+  influxdb:
+    image: influxdb:latest
+    restart: always
+    container_name: influxdb
+    hostname: influxdb
+    volumes:
+      - $PWD/influxdb:/var/lib/influxdb
+    env_file:
+      - $PWD/influxdb/env.influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+      - "8088:8088"
